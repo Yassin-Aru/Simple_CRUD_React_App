@@ -7,6 +7,7 @@ const App = () => {
   const [age, setAge] = useState(0);
   const [position, setPosition] = useState('');
   const [email, setEmail] = useState('');
+  const [empList, setEmpList] = useState([]);
 
   const addEmp = () => {
     Axios.post('http://localhost:3001/create', { 
@@ -19,6 +20,13 @@ const App = () => {
       console.log('Success');
     })
   }
+
+  const getEmp = () => {
+    Axios.get('http://localhost:3001/emplist')
+    .then(res => setEmpList(res.json()))
+  }
+
+  console.log(empList);
 
   return (
     <>
@@ -65,6 +73,11 @@ const App = () => {
         Add Employee
       </button>
       <hr />
+      <button
+        onClick={getEmp}
+      >
+        Show Employees
+      </button>
     </div>
   </form>
   {/* Form End */}

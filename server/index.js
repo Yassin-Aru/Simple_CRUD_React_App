@@ -34,6 +34,20 @@ app.post('/create', (req, res) => {
   );
 });
 
+
+app.get('/emplist' , (req, res) => {
+    db.query("SELECT * FROM Emp", 
+    (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send('Error occurred while inserting values');
+        } else {
+          res.send(result);
+        }
+      }
+    )
+})
+
 app.listen(3001, () => {
   console.log('Server is Running on port 3001');
 });
