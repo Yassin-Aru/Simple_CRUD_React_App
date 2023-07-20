@@ -1,6 +1,6 @@
 import './App.css';
 import { useState } from 'react';
-
+import Axios from 'axios';
 
 const App = () => {
   const [name, setName] = useState('');
@@ -8,11 +8,22 @@ const App = () => {
   const [position, setPosition] = useState('');
   const [email, setEmail] = useState('');
 
+  const addEmp = () => {
+    Axios.post('http://localhost:3001/create', { 
+      // THe body that goes with request
+      name : name,
+      age: age,
+      position: position,
+      email: email,
+    }).then(() => {
+      console.log('Success');
+    })
+  }
 
   return (
     <>
   {/* Form */}
-  <form method=''>
+  <form>
     <div className="box-outer">
       <h2 className="heading">Sign Up Form</h2>
       <label htmlFor='name'>Full Name</label>
@@ -48,7 +59,11 @@ const App = () => {
         onChange={(e) => setEmail(e.target.value)}
       />
       <hr />
-      <button>Add Employee</button>
+      <button
+        onClick={addEmp}
+      >
+        Add Employee
+      </button>
       <hr />
     </div>
   </form>
